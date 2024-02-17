@@ -4,10 +4,8 @@ import com.mgb.scoreMe.KYC.PAN.converter.PANConverter;
 import com.mgb.scoreMe.KYC.PAN.converter.PANRequestConverter;
 import com.mgb.scoreMe.KYC.PAN.model.PANDetailResponse;
 import com.mgb.scoreMe.KYC.PAN.model.PANRequest;
-import com.mgb.scoreMe.KYC.PAN.model.PANVerificationResponse;
 import com.mgb.scoreMe.KYC.PAN.repo.PANDetailResponseRepo;
 import com.mgb.scoreMe.KYC.PAN.repo.PANRequestRepo;
-import com.mgb.scoreMe.KYC.PAN.repo.PANVerificationResponseRepo;
 import com.mgb.scoreMe.config.Config;
 import com.mgb.scoreMe.util.RequestFormatter;
 import okhttp3.*;
@@ -39,7 +37,7 @@ public class PANDetailService {
 //        Request request = new Request.Builder().url(apiUrl).post(body).
 //                addHeader("ClientId", "f511d74fa95fa75f35c5885e3be68563").addHeader("ClientSecret", "b8a67b8b4010612064a2c1da5b10626a693cfb8e6d79dd77c8768732831b4725")
 //                .build();
-        Request request = RequestFormatter.formatRequest(apiUrl,body);
+        Request request = RequestFormatter.formatPostRequest(apiUrl,body);
 
         System.out.println("request build");
         try (Response response = client.newCall(request).execute()) {

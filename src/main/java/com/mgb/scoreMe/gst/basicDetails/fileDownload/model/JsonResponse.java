@@ -18,7 +18,7 @@ public class JsonResponse {
 String pan;
 @OneToMany(cascade = CascadeType.ALL)
 List<GSTINInfo> gstinInfo;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
 GSTINFilingDetails gstinFilingDetails;
     @OneToMany(cascade = CascadeType.ALL)
 List<GSTINDetails> gstinDetails;

@@ -4,8 +4,6 @@ import com.mgb.scoreMe.KYC.aadhaar.OTP.authOTP.model.AadhaarOTPAuthRequest;
 import com.mgb.scoreMe.KYC.aadhaar.OTP.authOTP.model.AadhaarOTPAuthResponse;
 import com.mgb.scoreMe.KYC.aadhaar.OTP.authOTP.repo.AadhaarOTPAuthRequestRepo;
 import com.mgb.scoreMe.KYC.aadhaar.OTP.authOTP.repo.AadhaarOTPAuthResponseRepo;
-import com.mgb.scoreMe.KYC.aadhaar.OTP.getOTP.model.AadhaarOTPResponse;
-import com.mgb.scoreMe.KYC.aadhaar.OTP.getOTP.model.AadharOTPRequest;
 import com.mgb.scoreMe.KYC.aadhaar.converter.AadhaarConverter;
 import com.mgb.scoreMe.config.Config;
 import com.mgb.scoreMe.util.RequestFormatter;
@@ -40,7 +38,7 @@ public class AadhaarOTPAuthService {
 //        Request request = new Request.Builder().url(apiUrl).post(body).
 //                addHeader("ClientId", "f511d74fa95fa75f35c5885e3be68563").addHeader("ClientSecret", "b8a67b8b4010612064a2c1da5b10626a693cfb8e6d79dd77c8768732831b4725")
 //                .build();
-        Request request = RequestFormatter.formatRequest(apiUrl,body);
+        Request request = RequestFormatter.formatPostRequest(apiUrl,body);
 
         System.out.println("request build");
         try (Response response = client.newCall(request).execute()) {

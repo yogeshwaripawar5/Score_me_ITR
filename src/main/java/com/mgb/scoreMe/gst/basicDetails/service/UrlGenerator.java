@@ -11,15 +11,16 @@ import com.mgb.scoreMe.gst.listByPAN.model.GSTINByPANRequest;
 import com.mgb.scoreMe.util.RequestFormatter;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-
+@Service
 public class UrlGenerator {
     @Autowired
     UrlResponseRepo responseRepo;
 
     public UrlResponse getGSTINByPANFromApi(String referenceId)  {
-        System.out.println("inside verification service");
+        System.out.println("inside getGSTIN URL By REF ID FromApi service");
        // requestRepo.save(gstinByPANRequest);
         UrlResponse urlResponse=null;
         String apiUrl = Config.gstUrl+"/gst/external/getgstreport?referenceId="+referenceId;
@@ -32,7 +33,7 @@ public class UrlGenerator {
 //        String requestStr= RequestConverter.convertGSTINByPANAPIRequestToJSON(RequestConverter.convertGSTINByPANARequesttoAPIRequest(gstinByPANRequest));
 //        System.out.println("requestStr "+requestStr);
         RequestBody body = RequestBody.create( mediaType,"")     ;
-        Request request = new Request.Builder().url(apiUrl).method("GET",body)
+        Request request = new Request.Builder().url(apiUrl).method("GET",null)
                 .addHeader("ClientId", "f511d74fa95fa75f35c5885e3be68563").addHeader("ClientSecret", "b8a67b8b4010612064a2c1da5b10626a693cfb8e6d79dd77c8768732831b4725")
                 .build();
 //        Request request = RequestFormatter.formatRequest(apiUrl,body);
@@ -44,7 +45,7 @@ public class UrlGenerator {
                 System.out.println("response successful");
                 System.out.println(response);
                 ResponseBody responseBody=response.body();
-                System.out.println("responseBody.toString() "+responseBody.source().readUtf8());
+                //System.out.println("responseBody.toString() "+responseBody.source().readUtf8());
                 urlResponse= UrlResponseConverter.convertJsonToUrlResponse(responseBody.source().readUtf8());
                 //System.out.println("panStatus "+gstinByPANResponse.getData());
                 responseRepo.save(urlResponse);

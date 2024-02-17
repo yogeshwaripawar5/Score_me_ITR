@@ -37,7 +37,7 @@ public AadhaarOTPResponse getAadhaarOTP(AadharOTPRequest otpRequest){
 //        Request request = new Request.Builder().url(apiUrl).post(body).
 //                addHeader("ClientId", "f511d74fa95fa75f35c5885e3be68563").addHeader("ClientSecret", "b8a67b8b4010612064a2c1da5b10626a693cfb8e6d79dd77c8768732831b4725")
 //                .build();
-    Request request = RequestFormatter.formatRequest(apiUrl,body);
+    Request request = RequestFormatter.formatPostRequest(apiUrl,body);
 
     System.out.println("request build");
     try (Response response = client.newCall(request).execute()) {

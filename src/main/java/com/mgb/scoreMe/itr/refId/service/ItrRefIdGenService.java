@@ -1,0 +1,68 @@
+package com.mgb.scoreMe.itr.refId.service;
+
+import com.mgb.scoreMe.config.Config;
+import com.mgb.scoreMe.itr.refId.converter.RequestConverter;
+import com.mgb.scoreMe.itr.refId.converter.ResponseConverter;
+import com.mgb.scoreMe.itr.refId.model.ItrEmailRequest;
+import com.mgb.scoreMe.itr.refId.model.ItrEmailResponse;
+import com.mgb.scoreMe.itr.refId.repo.ItrEmailRequestRepo;
+import com.mgb.scoreMe.itr.refId.repo.ItrEmailResponseRepo;
+import com.mgb.scoreMe.util.RequestFormatter;
+import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+
+@Service
+public class ItrRefIdGenService {
+    @Autowired
+    ItrEmailRequestRepo requestRepo;
+    @Autowired
+    ItrEmailResponseRepo responseRepo;
+
+    public ItrEmailResponse getItrRefIdByEmail(ItrEmailRequest emailRequest){
+
+        System.out.println("inside ITR REF ID by email from API service "+emailRequest.getEmail());
+        requestRepo.save(emailRequest);
+        ItrEmailResponse refIdResponse=null;
+        String apiUrl = Config.itrUrl+"/itr/external/fileAutomatedRequestUsingLink";
+        MediaType mediaType = MediaType.parse("application/json");
+//        OkHttpClient client = getOkHttpClientWithP12(p12FilePath, p12Password);
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        System.out.println("client prepared");
+        // String requestStr= PANConverter.convertPANRequestToJson(PANRequestConverter.convertPANRequestForAPI(panRequest));
+        String requestStr= RequestConverter.convertToJson(emailRequest);
+        System.out.println("requestStr "+requestStr);
+        RequestBody body = RequestBody.create(requestStr, mediaType)     ;
+//        Request request = new Request.Builder().url(apiUrl).post(body).
+//                addHeader("ClientId", "f511d74fa95fa75f35c5885e3be68563").addHeader("ClientSecret", "b8a67b8b4010612064a2c1da5b10626a693cfb8e6d79dd77c8768732831b4725")
+//                .build();
+        Request request = RequestFormatter.formatPostRequest(apiUrl,body);
+
+        System.out.println("request build");
+        try (Response response = client.newCall(request).execute()) {
+            System.out.println("request executed");
+            if (response.isSuccessful()) {
+                System.out.println("response successful");
+                System.out.println(response);
+                ResponseBody responseBody=response.body();
+                // System.out.println("responseBody.toString() "+responseBody.source().readUtf8());
+                refIdResponse= ResponseConverter.convertToItrEmailResponse(responseBody.source().readUtf8());
+                System.out.println("refIdResponse "+refIdResponse);
+                responseRepo.save(refIdResponse);
+
+            } else {
+                // System.out.println("Request failed. Response Headers: " +response.headers());
+
+                System.out.println("Request failed. Response code: "+ response.code());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return refIdResponse;
+    }
+}

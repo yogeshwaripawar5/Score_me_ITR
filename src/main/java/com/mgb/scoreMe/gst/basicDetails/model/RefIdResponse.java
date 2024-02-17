@@ -15,7 +15,7 @@ public class RefIdResponse {
     int id;
     @OneToOne(cascade = CascadeType.ALL)
     RefIdData data;
-    String resposneMessage;
-    String resposneCode;
+    String responseMessage;
+    String responseCode;
 
 }

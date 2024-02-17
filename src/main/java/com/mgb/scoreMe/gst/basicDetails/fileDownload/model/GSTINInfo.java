@@ -16,4 +16,8 @@ public class GSTINInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    String state;
+    String gstin;
+    String status;
+
 }

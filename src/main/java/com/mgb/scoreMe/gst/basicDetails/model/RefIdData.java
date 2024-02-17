@@ -16,4 +16,5 @@ public class RefIdData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    String referenceId;
 }
