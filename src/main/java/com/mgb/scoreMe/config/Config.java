@@ -14,9 +14,9 @@ public class Config {
 //    public static String gstUrl="https://sm-gst.scoreme.in";
 
     //SandBox
-    public static String itrUrl="https://sm-itr-sandbox.scoreme.in";
+//    public static String itrUrl="https://sm-itr-sandbox.scoreme.in";
 //Production
-//public static String itrUrl="https://sm-itr.scoreme.in";
+public static String itrUrl="https://sm-itr.scoreme.in";
 
     //SandBox
     public static String clientId="f511d74fa95fa75f35c5885e3be68563";

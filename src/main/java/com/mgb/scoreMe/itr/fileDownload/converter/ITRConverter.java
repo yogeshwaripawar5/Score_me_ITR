@@ -19,27 +19,27 @@ public class ITRConverter {
             GenInfo genInfo=GenInfoConverter.convertStringToGenInfo(genInfoJson);
             System.out.println("genInfoJson "+genInfoJson);
 
-            JsonObject taxDetailsJson=itrJson.get("Tax Details").getAsJsonObject();
-            TaxDetail taxDetail=TaxDetailsConverter.convertStringToTaxDetail(taxDetailsJson);
-
-            JsonObject taxCalculationJson=itrJson.get("Tax Calculation").getAsJsonObject();
-            TaxCalculation taxCalculation=TaxCalculationConverter.convertStringToTaxCalculation(taxCalculationJson);
-
-            JsonObject balanceSheetJson=itrJson.get("Balance Sheet").getAsJsonObject();
-            BalanceSheet balanceSheet=BalanceSheetConverter.convertStringToBalanceSheet(balanceSheetJson);
-
-            JsonObject profitAndLossJson=itrJson.get("Profit And Loss Statement").getAsJsonObject();
-            ProfitAndLoss profitAndLoss=ProfitAndLossConverter.convertStringToProfitAndLoss(profitAndLossJson);
-
-            JsonObject ratioAnalysisJson=itrJson.get("Ratio Analysis").getAsJsonObject();
-            RatioAnalysis  ratioAnalysis= RatioAnalysisConverter.convertStringToRatioAnalysis(ratioAnalysisJson);
+//            JsonObject taxDetailsJson=itrJson.get("Tax Details").getAsJsonObject();
+//            TaxDetail taxDetail=TaxDetailsConverter.convertStringToTaxDetail(taxDetailsJson);
+//
+//            JsonObject taxCalculationJson=itrJson.get("Tax Calculation").getAsJsonObject();
+//            TaxCalculation taxCalculation=TaxCalculationConverter.convertStringToTaxCalculation(taxCalculationJson);
+//
+//            JsonObject balanceSheetJson=itrJson.get("Balance Sheet").getAsJsonObject();
+//            BalanceSheet balanceSheet=BalanceSheetConverter.convertStringToBalanceSheet(balanceSheetJson);
+//
+//            JsonObject profitAndLossJson=itrJson.get("Profit And Loss Statement").getAsJsonObject();
+//            ProfitAndLoss profitAndLoss=ProfitAndLossConverter.convertStringToProfitAndLoss(profitAndLossJson);
+//
+//            JsonObject ratioAnalysisJson=itrJson.get("Ratio Analysis").getAsJsonObject();
+//            RatioAnalysis  ratioAnalysis= RatioAnalysisConverter.convertStringToRatioAnalysis(ratioAnalysisJson);
 
             itr.setGeneral_information(genInfo);
-            itr.setTax_details(taxDetail);
-            itr.setTax_calculation(taxCalculation);
-            itr.setBalance_sheet(balanceSheet);
-            itr.setProfit_and_loss_statement(profitAndLoss);
-            itr.setRatio_analysis(ratioAnalysis);
+//            itr.setTax_details(taxDetail);
+//            itr.setTax_calculation(taxCalculation);
+//            itr.setBalance_sheet(balanceSheet);
+//            itr.setProfit_and_loss_statement(profitAndLoss);
+//            itr.setRatio_analysis(ratioAnalysis);
 
         }catch(Exception ex){
             ex.printStackTrace();
